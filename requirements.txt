@@ -1,0 +1,5 @@
+instructor[groq]
+dotenv
+ddgs
+httpx
+trafilatura
