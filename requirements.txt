@@ -3,3 +3,4 @@ dotenv
 ddgs
 httpx
 trafilatura
+streamlit

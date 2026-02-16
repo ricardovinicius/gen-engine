@@ -30,7 +30,7 @@ class Summary(BaseModel):
 
 class SummarizingModel:
     def __init__(self):
-        self.client = instructor.from_provider(model="groq/llama-3.3-70b-versatile")
+        self.client = instructor.from_provider(model="groq/meta-llama/llama-4-scout-17b-16e-instruct")
 
     def summarize(self, content: str, source: str) -> Summary:
         """

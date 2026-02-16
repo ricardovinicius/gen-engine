@@ -16,8 +16,8 @@ class AugmentedResponse(BaseModel):
     """
     Represents the augmented response for a given query.
     """
-    response: str = Field(..., description="Response for a given query.")
-    sources: list[str] = Field(..., description="Sources used to generate the response.")
+    response: str = Field(..., description="The full answer text including in-line citations like [0][1].")
+    sources: list[str] = Field(..., description="A list of the unique source URLs used in the response.")
 
 RESPONSE_GENERATION_PROMPT = """
 You are a Search-Augmented Generation (RAG) engine. 
@@ -42,8 +42,8 @@ class ResponseGenerator:
         print(f"\n\nGenerating response for {query} based on {len(summaries)} summaries\n\n")
         
         user_prompt = f"""
-        User Query: ### {query} ###
-        Summaries: ### {summaries} ###
+        Question: ### {query} ###
+        Search Results: ### {summaries} ###
         """
 
         return self.client.chat.completions.create(
@@ -51,7 +51,7 @@ class ResponseGenerator:
             messages=[
                 {"role": "system", "content": RESPONSE_GENERATION_PROMPT},
                 {"role": "user", "content": user_prompt},
-            ],
+            ]
         )
 
 if __name__ == "__main__":

@@ -30,7 +30,10 @@ class GenerativeEngine:
         """
         Generates the answer for a given query.
         """
-        query_set: ReformulatedQueries = self.query_generator.generate_query_set(query)
+        # query_set: ReformulatedQueries = self.query_generator.generate_query_set(query)
+
+        # For simplifying purposes, we gonna use the original query only
+        query_set = ReformulatedQueries(queries=[query])
         results: list[SearchResult] = self.search_engine.full_search(query_set)
         summaries: list[Summary] = []
         for result in results:
